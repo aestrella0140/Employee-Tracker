@@ -75,3 +75,18 @@ async function viewAllEmployees() {
   const [allEmployees] = await db.promise().query(`SELECT employee.first_name, employee.last_name, role.job_title, role.salaries, department.department_name FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON  role.department_id = department.id;`);
   console.table(allEmployees);
 }
+
+async function addADepartment() {
+const addADepartmentPromt = await inquirer.prompt([
+  {
+    type: "input",
+    name: "department_name",
+    message: "What is the name of the department you would like to add?"
+  }
+])
+  const [departmentTable] = await db.promise().query(`INSERT INTO department (department_name) VALUES (?)` , addADepartmentPromt.department_name)
+  // console.table(departmentTable);
+  viewAllDepartments();
+};
+
+
