@@ -22,6 +22,5 @@ CREATE TABLE employee (
     last_name VARCHAR(30),
     role_id INT,
     CONSTRAINT fk_role foreign key (role_id) references role(id) ON DELETE SET NULL,
-    manager_id INT,
-    CONSTRAINT fk_employee foreign key (manager_id) references employee(id)
+    manager_id INT
 );

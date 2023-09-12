@@ -1,6 +1,10 @@
 # Employee-Tracker
 [MIT License](https://opensource.org/licenses/MIT)
 
+## Demo Link
+
+https://youtu.be/teHuoVxyN5Y
+
 ## Description
 
 This Project was to demonstrate my ablility to utilize MySQL backend applications. This challenge intoduced us to mysq12 and bringing back earlier skills like prompt users to interact with the code. By given a prompt in the terminal the user may view various components to there Employee Tracker. I took a different route by sending a command to the terminal through MySQL when ask to add or delete or view all content selected. 
@@ -57,3 +61,4 @@ add(department, role, employee)
 
 delete(department, role, employee)
 ![Alt text](<screenshots/Screenshot 2023-09-11 181835 delete.png>)
+
