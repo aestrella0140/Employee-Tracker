@@ -36,26 +36,35 @@ const promptUser = () => {
         "add a role",
         "add an employee",
         "update an employee role",
+        "delete department",
+        "delete role",
+        "delete employee",
       ]
     }
   ])
 // promise return
   .then((answers) => {
     const { choices } = answers;
-    if(choices === "view all departments") {
+    if (choices === "view all departments") {
         viewAllDepartments();
-    }else if(choices === "view all roles") {
+    }else if (choices === "view all roles") {
         viewAllRoles();
-    }else if(choices === "view all employees") {
+    }else if (choices === "view all employees") {
         viewAllEmployees();
-    }else if(choices === "add a department") {
+    }else if (choices === "add a department") {
         addADepartment();
-    }else if(choices === "add a role") {
+    }else if (choices === "add a role") {
         addARole();
-    }else if(choices === "add an employee") {
+    }else if (choices === "add an employee") {
         addAnEmployee();
-    }else if(choices === "update an employee role") {
+    }else if (choices === "update an employee role") {
         updateAnEmployeeRole();
+    }else if(choices === "delete department") {
+      deleteDepartment();
+    }else if (choices === "delete role") {
+      deleteRole();
+    }else if (choices === "delete employee") {
+      deleteEmployee();
     }
   })
 };
@@ -140,3 +149,55 @@ viewAllEmployees();
 };
 
 
+async function updateAnEmployeeRole() {
+  const updateEmployeeRole = await inquirer.prompt([
+    {
+      type: "input",
+      name: "first_name",
+      message: "Enter first name of the employee you want to update."
+    },
+    {
+      type: "number",
+      name: "role_id",
+      message: "Enter the role ID associated with the employee you want to update.(1-9)"
+    }
+  ])
+  const [updateEmployee] = await db.promise().query(`UPDATE employee SET role_id = ? WHERE first_name = ?`, [updateEmployeeRole.role_id, updateEmployeeRole.first_name])
+  viewAllEmployees();
+};
+
+async function deleteDepartment() {
+  const deleteADepartment = await inquirer.prompt([
+    {
+      type: "number",
+      name: "department_id",
+      message: "Enter department ID you would like to delete."
+    }
+  ])
+  const [deleteDep] = await db.promise().query(`DELETE FROM department WHERE ID = ?`, [deleteADepartment.department_id])
+  viewAllDepartments();
+};
+
+async function deleteRole() {
+  const deleteARole = await inquirer.prompt([
+    {
+      type: "number",
+      name: "role_id",
+      message: "Enter role ID you would like to delete."
+    }
+  ])
+  const [delrole] = await db.promise().query(`DELETE FROM role WHERE ID = ?`, [deleteARole.role_id])
+  viewAllRoles();
+};
+
+async function deleteEmployee() {
+  const deleteAnEmployee = await inquirer.prompt([
+    {
+      type: "number",
+      name: "employee_id",
+      message: "Enter employee ID yo would like to delete."
+    }
+  ])
+  const [delEmp] = await db.promise().query(`DELETE FROM employee WHERE ID = ?`, [deleteAnEmployee.employee_id])
+  viewAllEmployees();
+}
