@@ -200,4 +200,4 @@ async function deleteEmployee() {
   ])
   const [delEmp] = await db.promise().query(`DELETE FROM employee WHERE ID = ?`, [deleteAnEmployee.employee_id])
   viewAllEmployees();
-}
+};
